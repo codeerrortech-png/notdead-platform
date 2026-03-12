@@ -2,11 +2,12 @@ import { motion } from 'framer-motion'
 import { Wrench, Plus } from 'lucide-react'
 import GlassCard from '../../components/GlassCard'
 import NeonButton from '../../components/NeonButton'
+import { formatPrice } from '../../utils/currency'
 
 const mockTools = [
-  { id: 1, name: 'NetScan Pro', category: 'Vulnerability Scanners', price: 49, sales: 320 },
-  { id: 2, name: 'OSINT Kit', category: 'OSINT', price: 79, sales: 180 },
-  { id: 3, name: 'Forensics Lab', category: 'Forensics', price: 129, sales: 95 },
+  { id: 1, name: 'NetScan Pro', category: 'Vulnerability Scanners', price: 5, sales: 320 },
+  { id: 2, name: 'OSINT Kit', category: 'OSINT', price: 8, sales: 180 },
+  { id: 3, name: 'Forensics Lab', category: 'Forensics', price: 13, sales: 95 },
 ]
 
 export default function AdminTools() {
@@ -38,7 +39,7 @@ export default function AdminTools() {
                 <tr key={t.id} className="border-b border-cyber-accent/10 hover:bg-cyber-accent/5">
                   <td className="py-3 px-4 text-cyber-text font-medium">{t.name}</td>
                   <td className="py-3 px-4 text-cyber-text/70">{t.category}</td>
-                  <td className="py-3 px-4 text-cyber-accent">${t.price}</td>
+                  <td className="py-3 px-4 text-cyber-accent">{formatPrice(t.price)}</td>
                   <td className="py-3 px-4 text-cyber-text/80">{t.sales}</td>
                   <td className="py-3 px-4">
                     <button type="button" className="text-cyber-accent hover:underline text-sm">Edit</button>

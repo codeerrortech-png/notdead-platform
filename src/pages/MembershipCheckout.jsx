@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Shield, CreditCard, Lock, ArrowLeft, Check } from 'lucide-react'
 import { getPlanById } from '../utils/membershipPlansData'
+import { formatPrice } from '../utils/currency'
 import NeonButton from '../components/NeonButton'
 import CyberGrid from '../components/CyberGrid'
 
@@ -16,6 +17,7 @@ export default function MembershipCheckout() {
   const [done, setDone] = useState(false)
 
   const price = plan ? (yearly ? plan.yearly : plan.monthly) : 0
+  const originalPrice = plan ? (yearly ? plan.originalYearly : plan.originalMonthly) : 0
   const billingLabel = yearly ? 'year' : 'month'
 
   const handlePayment = (e) => {
@@ -87,9 +89,15 @@ export default function MembershipCheckout() {
                 </li>
               ))}
             </ul>
-            <p className="text-2xl font-bold text-cyber-accent mt-3">
-              ${price}<span className="text-sm font-normal text-cyber-text/50">/{billingLabel}</span>
-            </p>
+            <div className="mt-3">
+              {originalPrice != null && (
+                <span className="text-sm text-cyber-text/50 line-through mr-2">{formatPrice(originalPrice)}</span>
+              )}
+              <span className="inline-block px-2 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold mb-1">90% OFF</span>
+              <p className="text-2xl font-bold text-cyber-accent">
+                {formatPrice(price)}<span className="text-sm font-normal text-cyber-text/50">/{billingLabel}</span>
+              </p>
+            </div>
           </div>
           <form onSubmit={handlePayment} className="space-y-4">
             <div>
@@ -135,7 +143,7 @@ export default function MembershipCheckout() {
               disabled={loading}
             >
               <CreditCard className="w-4 h-4" />
-              {loading ? 'Processing...' : `Pay $${price}`}
+              {loading ? 'Processing...' : `Pay ${formatPrice(price)}`}
             </NeonButton>
           </form>
           <p className="text-center text-xs text-cyber-text/50 mt-6">

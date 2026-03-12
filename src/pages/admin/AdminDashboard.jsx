@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Users, BookOpen, Wrench, DollarSign, TrendingUp, Activity } from 'lucide-react'
+import { Users, BookOpen, Wrench, IndianRupee, TrendingUp, Activity } from 'lucide-react'
 import GlassCard from '../../components/GlassCard'
+import { formatPrice } from '../../utils/currency'
 
 const stats = [
   { label: 'Total Users', value: '12,450', icon: Users, change: '+12%' },
   { label: 'Active Courses', value: '6', icon: BookOpen, change: '' },
   { label: 'Tools Sold', value: '3,289', icon: Wrench, change: '+8%' },
-  { label: 'Revenue (MTD)', value: '$24,500', icon: DollarSign, change: '+18%' },
+  { label: 'Revenue (MTD)', value: formatPrice(12000), icon: IndianRupee, change: '+18%' },
 ]
 
 const recentActivity = [

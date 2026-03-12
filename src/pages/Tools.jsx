@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Download, DollarSign, LayoutGrid } from 'lucide-react'
+import { Download, IndianRupee, LayoutGrid } from 'lucide-react'
 import NeonButton from '../components/NeonButton'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
+import { formatPrice } from '../utils/currency'
 
 const categories = [
   'Vulnerability Scanners',
@@ -14,12 +15,12 @@ const categories = [
 ]
 
 const tools = [
-  { name: 'NetScan Pro', desc: 'Network scanner with CVE detection', features: ['Port scan', 'Service fingerprint', 'Export reports'], price: 49, category: 0 },
-  { name: 'OSINT Kit', desc: 'All-in-one OSINT collection suite', features: ['Social, DNS, WHOIS', 'API integrations'], price: 79, category: 1 },
-  { name: 'ReconX', desc: 'Reconnaissance and enumeration', features: ['Subdomain enum', 'Screenshot capture'], price: 59, category: 2 },
-  { name: 'PhishSim', desc: 'Safe phishing simulation for teams', features: ['Templates', 'Analytics', 'Training'], price: 99, category: 3 },
-  { name: 'Forensics Lab', desc: 'Disk and memory forensics', features: ['Image analysis', 'Timeline', 'Hash DB'], price: 129, category: 4 },
-  { name: 'VulnScan X', desc: 'Automated vulnerability assessment', features: ['CVE DB', 'Exploit sugg.', 'Reports'], price: 69, category: 0 },
+  { name: 'NetScan Pro', desc: 'Network scanner with CVE detection', features: ['Port scan', 'Service fingerprint', 'Export reports'], price: 5, originalPrice: 48, category: 0 },
+  { name: 'OSINT Kit', desc: 'All-in-one OSINT collection suite', features: ['Social, DNS, WHOIS', 'API integrations'], price: 8, originalPrice: 78, category: 1 },
+  { name: 'ReconX', desc: 'Reconnaissance and enumeration', features: ['Subdomain enum', 'Screenshot capture'], price: 6, originalPrice: 58, category: 2 },
+  { name: 'PhishSim', desc: 'Safe phishing simulation for teams', features: ['Templates', 'Analytics', 'Training'], price: 10, originalPrice: 98, category: 3 },
+  { name: 'Forensics Lab', desc: 'Disk and memory forensics', features: ['Image analysis', 'Timeline', 'Hash DB'], price: 13, originalPrice: 128, category: 4 },
+  { name: 'VulnScan X', desc: 'Automated vulnerability assessment', features: ['CVE DB', 'Exploit sugg.', 'Reports'], price: 7, originalPrice: 68, category: 0 },
 ]
 
 export default function Tools() {
@@ -80,10 +81,20 @@ export default function Tools() {
                   <li key={f}>• {f}</li>
                 ))}
               </ul>
-              <div className="flex items-center justify-between gap-4">
-                <span className="flex items-center gap-1 text-cyber-accent font-semibold">
-                  <DollarSign className="w-4 h-4" /> {t.price}
-                </span>
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div className="flex items-center gap-2">
+                  {t.originalPrice != null && (
+                    <span className="text-sm text-cyber-text/50 line-through">
+                      {formatPrice(t.originalPrice)}
+                    </span>
+                  )}
+                  <span className="inline-block px-1.5 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold">
+                    90% OFF
+                  </span>
+                  <span className="flex items-center gap-1 text-cyber-accent font-semibold">
+                    <IndianRupee className="w-4 h-4" /> {formatPrice(t.price)}
+                  </span>
+                </div>
                 <NeonButton variant="primary" className="gap-1 shrink-0">
                   <Download className="w-4 h-4" /> Buy / Download
                 </NeonButton>

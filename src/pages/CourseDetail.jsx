@@ -2,6 +2,7 @@ import { Link, useParams, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Clock, Star, ArrowLeft, CheckCircle, CreditCard } from 'lucide-react'
 import { getCourseById, levelColors } from '../utils/coursesData'
+import { formatPrice } from '../utils/currency'
 import NeonButton from '../components/NeonButton'
 import GlassCard from '../components/GlassCard'
 
@@ -65,7 +66,17 @@ export default function CourseDetail() {
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-cyber-accent/10">
             <div>
               <span className="text-cyber-text/60 text-sm">Price</span>
-              <p className="text-2xl font-bold text-cyber-accent">${course.price}</p>
+              <div className="flex items-baseline gap-2 flex-wrap mt-1">
+                <span className="inline-block px-2 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold">
+                  90% OFF
+                </span>
+                {course.originalPrice != null && (
+                  <span className="text-lg text-cyber-text/50 line-through">
+                    {formatPrice(course.originalPrice)}
+                  </span>
+                )}
+                <p className="text-2xl font-bold text-cyber-accent">{formatPrice(course.price)}</p>
+              </div>
             </div>
             <Link to={`/checkout/${course.id}`}>
               <NeonButton variant="primary" className="w-full sm:w-auto gap-2">

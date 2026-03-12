@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Shield, CreditCard, Lock, ArrowLeft } from 'lucide-react'
 import { getCourseById } from '../utils/coursesData'
+import { formatPrice } from '../utils/currency'
 import NeonButton from '../components/NeonButton'
 import CyberGrid from '../components/CyberGrid'
 
@@ -73,7 +74,13 @@ export default function Checkout() {
           <div className="mb-6 p-4 rounded-xl bg-cyber-secondary/50 border border-cyber-accent/10">
             <p className="text-cyber-text/60 text-sm">Course</p>
             <p className="font-display font-semibold text-cyber-text">{course.title}</p>
-            <p className="text-2xl font-bold text-cyber-accent mt-2">${course.price}</p>
+            <div className="mt-2">
+              {course.originalPrice != null && (
+                <span className="text-sm text-cyber-text/50 line-through mr-2">{formatPrice(course.originalPrice)}</span>
+              )}
+              <span className="inline-block px-2 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold mb-1">90% OFF</span>
+              <p className="text-2xl font-bold text-cyber-accent">{formatPrice(course.price)}</p>
+            </div>
           </div>
           <form onSubmit={handlePayment} className="space-y-4">
             <div>
@@ -119,7 +126,7 @@ export default function Checkout() {
               disabled={loading}
             >
               <CreditCard className="w-4 h-4" />
-              {loading ? 'Processing...' : `Pay $${course.price}`}
+              {loading ? 'Processing...' : `Pay ${formatPrice(course.price)}`}
             </NeonButton>
           </form>
           <p className="text-center text-xs text-cyber-text/50 mt-6">

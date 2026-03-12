@@ -2,16 +2,20 @@ export const plans = [
   {
     id: 'starter',
     name: 'Starter Plan',
-    monthly: 19,
-    yearly: 159,
+    monthly: 2,
+    yearly: 16,
+    originalMonthly: 18,
+    originalYearly: 158,
     features: ['Basic courses', 'Limited labs', 'Community access'],
     highlight: false,
   },
   {
     id: 'pro',
     name: 'Pro Hacker Plan',
-    monthly: 49,
-    yearly: 399,
+    monthly: 5,
+    yearly: 40,
+    originalMonthly: 48,
+    originalYearly: 398,
     features: [
       'All courses',
       'Advanced hacking labs',
@@ -23,8 +27,10 @@ export const plans = [
   {
     id: 'elite',
     name: 'Elite Security Plan',
-    monthly: 99,
-    yearly: 799,
+    monthly: 10,
+    yearly: 80,
+    originalMonthly: 98,
+    originalYearly: 798,
     features: [
       'All pro features',
       'Exclusive investigation tools',

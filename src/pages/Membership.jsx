@@ -6,6 +6,7 @@ import NeonButton from '../components/NeonButton'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
 import { plans } from '../utils/membershipPlansData'
+import { formatPrice } from '../utils/currency'
 
 export default function Membership() {
   const [yearly, setYearly] = useState(false)
@@ -62,12 +63,20 @@ export default function Membership() {
               {p.name}
             </h3>
             <div className="mb-6">
-              <span className="text-3xl font-bold text-cyber-accent">
-                ${yearly ? p.yearly : p.monthly}
+              <span className="inline-block px-2 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold mb-1">
+                90% OFF
               </span>
-              <span className="text-cyber-text/50 text-sm ml-1">
-                /{yearly ? 'year' : 'month'}
-              </span>
+              <div className="flex items-baseline gap-2 flex-wrap">
+                <span className="text-lg text-cyber-text/50 line-through">
+                  {formatPrice(yearly ? p.originalYearly : p.originalMonthly)}
+                </span>
+                <span className="text-3xl font-bold text-cyber-accent">
+                  {formatPrice(yearly ? p.yearly : p.monthly)}
+                </span>
+                <span className="text-cyber-text/50 text-sm">
+                  /{yearly ? 'year' : 'month'}
+                </span>
+              </div>
             </div>
             <ul className="space-y-3 mb-8">
               {p.features.map((f) => (
