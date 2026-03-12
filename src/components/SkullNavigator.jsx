@@ -235,11 +235,12 @@ export default function SkullNavigator() {
     const handleClick = (e) => {
       if (!visible) return
       const target = e.target.closest('a')
-      const isInternalLink = target?.getAttribute('href')?.startsWith('/') && !target?.target
+      const href = target?.getAttribute('href') ?? ''
+      if (href.startsWith('http://') || href.startsWith('https://')) return
+      const isInternalLink = href.startsWith('/') && !target?.target
       if (isInternalLink) {
         e.preventDefault()
         e.stopPropagation()
-        const href = target.getAttribute('href')
         if (href && href !== location.pathname) triggerNavigationExplosion(href)
         return
       }

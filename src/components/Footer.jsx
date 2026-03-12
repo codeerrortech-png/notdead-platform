@@ -51,39 +51,39 @@ export default function Footer() {
             <h4 className="font-display font-semibold text-cyber-accent mb-4 text-sm uppercase tracking-wider">
               Follow
             </h4>
-            <div className="flex gap-4">
+            <div className="flex items-center gap-3">
               <motion.a
                 href="https://github.com/codeerrortech-png"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Github"
-                whileHover={{ scale: 1.15 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-cyber-text/80 hover:text-cyber-accent transition-colors"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-cyber-text/80 hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
               >
-                <Github className="w-5 h-5" />
+                <Github className="w-8 h-8 sm:w-9 sm:h-9" />
               </motion.a>
               <motion.a
                 href="https://www.instagram.com/zero______trace?igsh=MWEyY2pjYzhhOW52aA=="
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                whileHover={{ scale: 1.15 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-cyber-text/80 hover:text-cyber-accent transition-colors"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-cyber-text/80 hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-8 h-8 sm:w-9 sm:h-9" />
               </motion.a>
               <motion.a
                 href="https://www.instagram.com/_code._.error?igsh=MjlkOGllemF3ZWdo"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                whileHover={{ scale: 1.15 }}
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="text-cyber-text/80 hover:text-cyber-accent transition-colors"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-cyber-text/80 hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-8 h-8 sm:w-9 sm:h-9" />
               </motion.a>
             </div>
           </div>
