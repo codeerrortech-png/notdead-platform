@@ -2,20 +2,7 @@
 
 A modern, futuristic cybersecurity platform built with React, Vite, TailwindCSS, Framer Motion, and React Router.
 
-## Setup
 
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:5173](http://localhost:5173).
-
-## Build
-
-```bash
-npm run build
-npm run preview
 ```
 
 ## Features
