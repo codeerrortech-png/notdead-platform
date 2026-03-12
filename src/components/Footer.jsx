@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Shield, Mail, Github, Twitter, Linkedin } from 'lucide-react'
+import { Shield, Github, Instagram } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 export default function Footer() {
@@ -22,7 +22,6 @@ export default function Footer() {
               <li><a href="#" className="hover:text-cyber-accent transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-cyber-accent transition-colors">Terms</a></li>
               <li><a href="#" className="hover:text-cyber-accent transition-colors">Contact</a></li>
-              <li><Link to="/admin/login" className="hover:text-cyber-accent transition-colors text-cyber-text/50">Admin</Link></li>
             </ul>
           </div>
           <div>
@@ -53,22 +52,39 @@ export default function Footer() {
               Follow
             </h4>
             <div className="flex gap-4">
-              {[
-                { Icon: Github, label: 'Github' },
-                { Icon: Twitter, label: 'Twitter' },
-                { Icon: Linkedin, label: 'LinkedIn' },
-              ].map(({ Icon, label }) => (
-                <motion.a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="text-cyber-text/80 hover:text-cyber-accent transition-colors"
-                >
-                  <Icon className="w-5 h-5" />
-                </motion.a>
-              ))}
+              <motion.a
+                href="https://github.com/codeerrortech-png"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Github"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-cyber-text/80 hover:text-cyber-accent transition-colors"
+              >
+                <Github className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href="https://www.instagram.com/zero______trace?igsh=MWEyY2pjYzhhOW52aA=="
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-cyber-text/80 hover:text-cyber-accent transition-colors"
+              >
+                <Instagram className="w-5 h-5" />
+              </motion.a>
+              <motion.a
+                href="https://www.instagram.com/_code._.error?igsh=MjlkOGllemF3ZWdo"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                whileHover={{ scale: 1.15 }}
+                whileTap={{ scale: 0.95 }}
+                className="text-cyber-text/80 hover:text-cyber-accent transition-colors"
+              >
+                <Instagram className="w-5 h-5" />
+              </motion.a>
             </div>
           </div>
         </div>
