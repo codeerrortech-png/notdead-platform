@@ -48,7 +48,7 @@ export default function Footer() {
             </form>
           </div>
           <div>
-            <h4 className="font-display font-semibold text-cyber-accent mb-4 text-sm uppercase tracking-wider">
+            <h4 className="font-display font-semibold text-cyber-accent mb-4 text-lg sm:text-xl uppercase tracking-wider">
               Follow
             </h4>
             <div className="flex items-center gap-3">
