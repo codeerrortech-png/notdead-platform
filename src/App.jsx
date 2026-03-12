@@ -11,7 +11,9 @@ import Membership from './pages/Membership'
 import MembershipCheckout from './pages/MembershipCheckout'
 import Tools from './pages/Tools'
 import Services from './pages/Services'
+import ServiceDetail from './pages/ServiceDetail'
 import Resources from './pages/Resources'
+import ResourceDetail from './pages/ResourceDetail'
 import Community from './pages/Community'
 import Testimonials from './pages/Testimonials'
 import Login from './pages/Login'
@@ -39,7 +41,9 @@ export default function App() {
         <Route path="membership/checkout/:planId" element={<MembershipCheckout />} />
         <Route path="tools" element={<Tools />} />
         <Route path="services" element={<Services />} />
+        <Route path="services/:slug" element={<ServiceDetail />} />
         <Route path="resources" element={<Resources />} />
+        <Route path="resources/:slug" element={<ResourceDetail />} />
         <Route path="community" element={<Community />} />
         <Route path="testimonials" element={<Testimonials />} />
         <Route path="*" element={<Navigate to="/" replace />} />

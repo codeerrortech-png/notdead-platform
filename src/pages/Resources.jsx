@@ -1,16 +1,9 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { BookOpen, FileText, Video, Download, ExternalLink } from 'lucide-react'
-import NeonButton from '../components/NeonButton'
+import { ExternalLink } from 'lucide-react'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
-
-const resources = [
-  { title: 'Cybersecurity Blog', desc: 'Latest articles and threat analyses', icon: BookOpen },
-  { title: 'OSINT Guides', desc: 'Step-by-step OSINT methodologies', icon: FileText },
-  { title: 'Tool Tutorials', desc: 'Video and written tool walkthroughs', icon: Video },
-  { title: 'Case Studies', desc: 'Real-world breach and investigation cases', icon: FileText },
-  { title: 'Downloadable Resources', desc: 'Cheat sheets, templates, checklists', icon: Download },
-]
+import { resources } from '../utils/resourcesData'
 
 export default function Resources() {
   return (
@@ -29,9 +22,12 @@ export default function Resources() {
               {r.title}
             </h3>
             <p className="text-sm text-cyber-text/70 mb-6 flex-1">{r.desc}</p>
-            <NeonButton variant="outline" className="gap-2">
+            <Link
+              to={`/resources/${r.slug}`}
+              className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg font-mono text-sm font-medium border border-cyber-accent text-cyber-accent hover:bg-cyber-accent/10 hover:shadow-neon hover:border-cyber-accent/70 transition-all duration-300 min-h-[44px] sm:min-h-0"
+            >
               Explore <ExternalLink className="w-3.5 h-3.5" />
-            </NeonButton>
+            </Link>
           </GlassCard>
         ))}
       </div>

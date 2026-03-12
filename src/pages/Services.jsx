@@ -1,41 +1,8 @@
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Shield, Eye, FileText, Search, Fingerprint, ShieldAlert } from 'lucide-react'
-import NeonButton from '../components/NeonButton'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
-
-const services = [
-  {
-    title: 'Data Breach Intelligence',
-    desc: 'Monitor and analyze breach databases; get alerts and attribution.',
-    icon: Shield,
-  },
-  {
-    title: 'Dark Web Monitoring',
-    desc: 'Track mentions of your brand and credentials on dark web markets.',
-    icon: Eye,
-  },
-  {
-    title: 'Threat Intelligence Reports',
-    desc: 'Regular reports on emerging threats and actor TTPs.',
-    icon: FileText,
-  },
-  {
-    title: 'Corporate Security Investigations',
-    desc: 'Internal and external investigations with legal-grade documentation.',
-    icon: Search,
-  },
-  {
-    title: 'Digital Footprint Analysis',
-    desc: "Map your organization's exposed attack surface and exposure.",
-    icon: Fingerprint,
-  },
-  {
-    title: 'Incident Response & Recovery',
-    desc: 'Rapid containment, forensics, and recovery support for security incidents.',
-    icon: ShieldAlert,
-  },
-]
+import { services } from '../utils/servicesData'
 
 export default function Services() {
   return (
@@ -54,7 +21,12 @@ export default function Services() {
               {s.title}
             </h3>
             <p className="text-sm text-cyber-text/70 mb-6">{s.desc}</p>
-            <NeonButton variant="outline">Learn More</NeonButton>
+            <Link
+              to={`/services/${s.slug}`}
+              className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg font-mono text-sm font-medium border border-cyber-accent text-cyber-accent hover:bg-cyber-accent/10 hover:shadow-neon hover:border-cyber-accent/70 transition-all duration-300 min-h-[44px] sm:min-h-0"
+            >
+              Learn More
+            </Link>
           </GlassCard>
         ))}
       </div>

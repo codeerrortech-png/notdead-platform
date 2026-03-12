@@ -21,7 +21,6 @@ export default function Footer() {
               <li><Link to="/tools" className="hover:text-cyber-accent transition-colors">Tools</Link></li>
               <li><a href="#" className="hover:text-cyber-accent transition-colors">Privacy Policy</a></li>
               <li><a href="#" className="hover:text-cyber-accent transition-colors">Terms</a></li>
-              <li><a href="#" className="hover:text-cyber-accent transition-colors">Contact</a></li>
             </ul>
           </div>
           <div>
