@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { motion, useMotionValue, animate } from 'framer-motion'
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion'
 
 const NEON_GREEN = '#00ff9c'
 const DARK_BG = '#0b0f17'
 
-// Cyberpunk skull — k.png (headphones wala neon line-art) + neon green glow
+// Clean skull cursor — no glow, no blur, transparent background
 function SkullIcon({ className = '' }) {
   return (
     <img
@@ -16,7 +16,6 @@ function SkullIcon({ className = '' }) {
         width: '100%',
         height: '100%',
         objectFit: 'contain',
-        filter: 'drop-shadow(0 0 12px rgba(0,255,156,0.9)) drop-shadow(0 0 24px rgba(0,255,156,0.5)) brightness(1.1)',
       }}
     />
   )
@@ -154,21 +153,23 @@ export default function SkullNavigator() {
   const motionX = useMotionValue(0)
   const motionY = useMotionValue(0)
   const motionRotate = useMotionValue(0)
+  const displayX = useTransform(motionX, (v) => v)
+  const displayY = useTransform(motionY, (v) => v)
+  const targetX = useRef(0)
+  const targetY = useRef(0)
+  const currentX = useRef(0)
+  const currentY = useRef(0)
+  const LAG = 0.12
 
   const moveTo = useCallback((x, y, opts = {}) => {
     const { glitch = false } = opts
-    const tx = x - skullSize / 2
-    const ty = y - skullSize / 2
+    targetX.current = x
+    targetY.current = y
     if (glitch) {
-      animate(motionX, tx, { type: 'spring', stiffness: 300, damping: 25 })
-      animate(motionY, ty, { type: 'spring', stiffness: 300, damping: 25 })
       animate(motionRotate, [0, -8, 8, -4, 4, 0], { duration: 0.5, ease: 'easeOut' })
       setTimeout(() => motionRotate.set(0), 500)
-    } else {
-      animate(motionX, tx, { type: 'spring', stiffness: 300, damping: 25 })
-      animate(motionY, ty, { type: 'spring', stiffness: 300, damping: 25 })
     }
-  }, [motionX, motionY, motionRotate])
+  }, [motionRotate])
 
   const triggerNavigationExplosion = useCallback((path) => {
     setPendingPath(path)
@@ -193,20 +194,42 @@ export default function SkullNavigator() {
     if (didInitRef.current || !centerX || !centerY) return
     didInitRef.current = true
     setVisible(true)
-    motionX.set(centerX - skullSize / 2)
-    motionY.set(centerY - skullSize / 2)
+    targetX.current = centerX
+    targetY.current = centerY
+    currentX.current = centerX
+    currentY.current = centerY
+    motionX.set(centerX)
+    motionY.set(centerY)
   }, [centerX, centerY, motionX, motionY])
 
-  // Mouse follow — skull cursor ke sath chalta hai (explosion ke dauran band)
+  // requestAnimationFrame: smooth lag follow only (no trail, no glow)
+  useEffect(() => {
+    let rafId = 0
+    const tick = () => {
+      const tx = targetX.current
+      const ty = targetY.current
+      const cx = currentX.current
+      const cy = currentY.current
+      currentX.current += (tx - cx) * LAG
+      currentY.current += (ty - cy) * LAG
+      motionX.set(currentX.current)
+      motionY.set(currentY.current)
+      rafId = requestAnimationFrame(tick)
+    }
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [motionX, motionY])
+
+  // Mouse: set target for rAF to follow
   useEffect(() => {
     const handleMove = (e) => {
       if (!visible || isExploding || isNavigatingRef.current) return
-      motionX.set(e.clientX - skullSize / 2)
-      motionY.set(e.clientY - skullSize / 2)
+      targetX.current = e.clientX
+      targetY.current = e.clientY
     }
     window.addEventListener('mousemove', handleMove)
     return () => window.removeEventListener('mousemove', handleMove)
-  }, [visible, isExploding, motionX, motionY])
+  }, [visible, isExploding])
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -229,28 +252,22 @@ export default function SkullNavigator() {
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-[9999] pointer-events-none"
-      style={{ left: 0, right: 0, top: 0, bottom: 0 }}
+      className="fixed inset-0 pointer-events-none"
+      style={{ left: 0, top: 0, width: '100%', height: '100%', zIndex: 999999 }}
       aria-hidden
     >
-      {/* Skull — mouse ke sath follow karta hai */}
+      {/* Clean skull cursor only — no trail, no glow */}
       {visible && !isExploding && (
         <motion.div
-          className="absolute w-12 h-12 flex items-center justify-center pointer-events-none"
+          className="absolute top-0 left-0 w-12 h-12 flex items-center justify-center pointer-events-none -translate-x-1/2 -translate-y-1/2"
           style={{
-            x: motionX,
-            y: motionY,
+            x: displayX,
+            y: displayY,
             rotate: motionRotate,
             willChange: 'transform',
           }}
         >
-          <motion.div
-            animate={{ scale: [1, 1.08, 1], opacity: [0.9, 1, 0.9] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-full h-full flex items-center justify-center"
-          >
-            <SkullIcon className="w-full h-full" />
-          </motion.div>
+          <SkullIcon className="w-full h-full" />
         </motion.div>
       )}
 

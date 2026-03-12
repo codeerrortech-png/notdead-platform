@@ -10,6 +10,10 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+body,
+* {
+  cursor: none !important;
+}
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
