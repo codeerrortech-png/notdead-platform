@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex flex-col items-center justify-center px-4 sm:px-6 py-16 sm:py-24 text-center overflow-hidden">
+      <section className="relative min-h-[95vh] sm:min-h-[100vh] flex flex-col items-center justify-center px-4 sm:px-6 py-20 sm:py-28 text-center overflow-hidden">
         <div
           className="absolute inset-0 pointer-events-none bg-gradient-radial-cyber opacity-60"
           aria-hidden
@@ -25,10 +25,10 @@ export default function Home() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="relative inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyber-accent/20 mb-8 animate-glow-pulse"
+          className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass border border-cyber-accent/20 mb-10 animate-glow-pulse"
         >
-          <Zap className="w-4 h-4 text-cyber-accent" />
-          <span className="font-mono text-xs sm:text-sm text-cyber-accent/90">
+          <Zap className="w-5 h-5 text-cyber-accent" />
+          <span className="font-mono text-sm sm:text-base font-semibold text-cyber-text">
             Elite Cybersecurity Training
           </span>
         </motion.div>
@@ -36,7 +36,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display font-bold text-3xl sm:text-5xl lg:text-6xl xl:text-7xl text-cyber-text max-w-5xl leading-tight mb-4 sm:mb-6 px-1"
+          className="font-display font-extrabold text-4xl sm:text-5xl lg:text-7xl xl:text-8xl text-cyber-text max-w-5xl leading-tight mb-5 sm:mb-6 px-1"
         >
           Master Cybersecurity.{' '}
           <span className="text-cyber-accent glow-text">Think Like a Hacker.</span>{' '}
@@ -46,7 +46,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="text-cyber-text/80 max-w-2xl mb-8 sm:mb-12 text-sm sm:text-base leading-relaxed px-1"
+          className="text-cyber-text font-medium max-w-2xl mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed px-1"
         >
           A cybersecurity learning platform offering advanced courses, investigation tools,
           threat intelligence services, and premium memberships.
