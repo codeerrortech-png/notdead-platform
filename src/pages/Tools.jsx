@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Download, IndianRupee, LayoutGrid } from 'lucide-react'
-import NeonButton from '../components/NeonButton'
+import ChaosButton from '../components/ChaosButton'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
 import { formatPrice } from '../utils/currency'
@@ -95,9 +95,9 @@ export default function Tools() {
                     <IndianRupee className="w-4 h-4" /> {formatPrice(t.price)}
                   </span>
                 </div>
-                <NeonButton variant="primary" className="gap-1 shrink-0">
+                <ChaosButton className="gap-1 shrink-0">
                   <Download className="w-4 h-4" /> Buy / Download
-                </NeonButton>
+                </ChaosButton>
               </div>
             </GlassCard>
           ))}

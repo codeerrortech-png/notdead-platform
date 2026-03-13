@@ -6,7 +6,7 @@
   --cyber-bg: #0b0f17;
   --cyber-secondary: #111827;
   --cyber-accent: #00ff9c;
-  --cyber-text: #e5e7eb;
+  --cyber-text: #0a0a0a;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -69,6 +69,13 @@ body {
 @keyframes scanline {
   0% { background-position: 0 0; }
   100% { background-position: 0 100%; }
+}
+@keyframes scan-down {
+  0% { top: -2px; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.hero-scan-line {
+  animation: scan-down 6s linear infinite;
 }
 .glow-text {
   text-shadow: 0 0 20px rgba(0, 255, 156, 0.6), 0 0 40px rgba(0, 255, 156, 0.3);

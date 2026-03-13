@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { MessageCircle, Users, Trophy, FlaskConical, Medal, ChevronRight } from 'lucide-react'
-import NeonButton from '../components/NeonButton'
+import ChaosButton from '../components/ChaosButton'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
 
@@ -70,9 +70,9 @@ export default function Community() {
               </motion.li>
             ))}
           </ul>
-          <NeonButton variant="outline" className="w-full mt-6">
+          <ChaosButton className="w-full mt-6">
             Join Community
-          </NeonButton>
+          </ChaosButton>
         </GlassCard>
       </div>
     </div>

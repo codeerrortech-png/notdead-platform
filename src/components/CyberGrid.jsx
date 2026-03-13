@@ -1,6 +1,6 @@
-export default function CyberGrid() {
+export default function CyberGrid({ dimmed = false }) {
   return (
-    <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden>
+    <div className={`fixed inset-0 pointer-events-none z-0 overflow-hidden transition-opacity duration-300 ${dimmed ? 'opacity-40' : 'opacity-100'}`} aria-hidden>
       <div className="absolute inset-0 cyber-grid opacity-50" />
       <div
         className="absolute inset-0 opacity-100"

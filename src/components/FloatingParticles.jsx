@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
 
-const PARTICLE_COUNT = 40
+const PARTICLE_COUNT = 18
 const chars = '01アイウエオカキクケコ<>{}[]|/\\'
 
 function Particle({ delay, x, size, duration, char }) {

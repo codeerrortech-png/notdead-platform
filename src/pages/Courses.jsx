@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Clock, Star, Lock, BookOpen } from 'lucide-react'
-import NeonButton from '../components/NeonButton'
+import { Clock, Star } from 'lucide-react'
+import ChaosButton from '../components/ChaosButton'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
 import { courses, levelColors } from '../utils/coursesData'
@@ -15,7 +14,7 @@ export default function Courses() {
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {courses.map((c, i) => (
-          <GlassCard key={c.id} delay={i * 0.06} hover>
+          <GlassCard key={c.id} delay={i * 0.06} hover className="overflow-hidden">
             <div
               className="h-32 -mx-6 -mt-6 mb-4 rounded-t-xl flex items-center justify-center border-b border-cyber-accent/10"
               style={{ background: c.thumb }}
@@ -37,11 +36,9 @@ export default function Courses() {
                 <Star className="w-3.5 h-3.5 fill-current" /> {c.rating}
               </span>
             </div>
-            <Link to={`/courses/${c.id}`} className="block">
-              <NeonButton variant="outline" className="w-full">
-                View Details & Enroll
-              </NeonButton>
-            </Link>
+            <ChaosButton as={Link} to={`/courses/${c.id}`} className="w-full">
+              View Details & Enroll
+            </ChaosButton>
           </GlassCard>
         ))}
       </div>

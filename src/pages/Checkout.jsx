@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Shield, CreditCard, Lock, ArrowLeft } from 'lucide-react'
 import { getCourseById } from '../utils/coursesData'
 import { formatPrice } from '../utils/currency'
-import NeonButton from '../components/NeonButton'
+import ChaosButton from '../components/ChaosButton'
 import CyberGrid from '../components/CyberGrid'
 
 export default function Checkout() {
@@ -119,15 +119,14 @@ export default function Checkout() {
                 />
               </div>
             </div>
-            <NeonButton
+            <ChaosButton
               type="submit"
-              variant="primary"
-              className="w-full gap-2 mt-6"
+              className="w-full mt-6"
               disabled={loading}
             >
               <CreditCard className="w-4 h-4" />
               {loading ? 'Processing...' : `Pay ${formatPrice(course.price)}`}
-            </NeonButton>
+            </ChaosButton>
           </form>
           <p className="text-center text-xs text-cyber-text/50 mt-6">
             Demo only. No real payment is processed.

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Settings, Mail, Bell, Shield } from 'lucide-react'
 import GlassCard from '../../components/GlassCard'
-import NeonButton from '../../components/NeonButton'
+import ChaosButton from '../../components/ChaosButton'
 
 export default function AdminSettings() {
   return (
@@ -33,7 +33,7 @@ export default function AdminSettings() {
             Security
           </h3>
           <p className="text-sm text-cyber-text/70 mb-4">Change admin password and 2FA settings.</p>
-          <NeonButton variant="outline">Security settings</NeonButton>
+          <ChaosButton>Security settings</ChaosButton>
         </GlassCard>
       </div>
     </motion.div>

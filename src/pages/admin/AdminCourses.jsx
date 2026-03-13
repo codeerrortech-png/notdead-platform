@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { BookOpen, Plus } from 'lucide-react'
 import GlassCard from '../../components/GlassCard'
-import NeonButton from '../../components/NeonButton'
+import ChaosButton from '../../components/ChaosButton'
 
 const mockCourses = [
   { id: 1, title: 'Ethical Hacking Fundamentals', level: 'Beginner', enrollments: 1250 },
@@ -17,9 +17,9 @@ export default function AdminCourses() {
           <h1 className="font-display font-bold text-2xl text-cyber-accent">Courses</h1>
           <p className="text-cyber-text/60 text-sm mt-1">Manage courses and enrollments</p>
         </div>
-        <NeonButton variant="primary" className="gap-2">
+        <ChaosButton>
           <Plus className="w-4 h-4" /> Add Course
-        </NeonButton>
+        </ChaosButton>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {mockCourses.map((c) => (

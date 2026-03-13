@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
+import ChaosButton from '../components/ChaosButton'
 import { services } from '../utils/servicesData'
 
 export default function Services() {
@@ -21,12 +22,9 @@ export default function Services() {
               {s.title}
             </h3>
             <p className="text-sm text-cyber-text/70 mb-6">{s.desc}</p>
-            <Link
-              to={`/services/${s.slug}`}
-              className="inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-3 sm:py-2.5 rounded-lg font-mono text-sm font-medium border border-cyber-accent text-cyber-accent hover:bg-cyber-accent/10 hover:shadow-neon hover:border-cyber-accent/70 transition-all duration-300 min-h-[44px] sm:min-h-0"
-            >
+            <ChaosButton as={Link} to={`/services/${s.slug}`}>
               Learn More
-            </Link>
+            </ChaosButton>
           </GlassCard>
         ))}
       </div>

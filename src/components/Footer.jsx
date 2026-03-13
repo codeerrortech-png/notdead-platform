@@ -15,8 +15,8 @@ export default function Footer() {
             <h4 className="font-display font-semibold text-cyber-accent mb-4 text-sm uppercase tracking-wider">
               Quick Links
             </h4>
-            <ul className="space-y-2.5 text-sm text-cyber-text/80">
-              <li><Link to="/" className="hover:text-cyber-accent transition-colors">About</Link></li>
+            <ul className="space-y-2.5 text-sm text-white">
+              <li><Link to="/about" className="hover:text-cyber-accent transition-colors">About</Link></li>
               <li><Link to="/courses" className="hover:text-cyber-accent transition-colors">Courses</Link></li>
               <li><Link to="/tools" className="hover:text-cyber-accent transition-colors">Tools</Link></li>
               <li><a href="#" className="hover:text-cyber-accent transition-colors">Privacy Policy</a></li>
@@ -27,14 +27,14 @@ export default function Footer() {
             <h4 className="font-display font-semibold text-cyber-accent mb-4 text-sm uppercase tracking-wider">
               Newsletter
             </h4>
-            <p className="text-sm text-cyber-text/80 mb-4">
+            <p className="text-sm text-white mb-4">
               Get security updates and tips.
             </p>
             <form className="flex flex-col sm:flex-row gap-2" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 min-w-0 px-3 py-2.5 rounded-lg bg-cyber-bg border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/50 focus:outline-none focus:border-cyber-accent focus:ring-1 focus:ring-cyber-accent/30 transition-all text-sm"
+                className="flex-1 min-w-0 px-3 py-2.5 rounded-lg bg-cyber-bg border border-cyber-accent/30 text-white placeholder-white/60 focus:outline-none focus:border-cyber-accent focus:ring-1 focus:ring-cyber-accent/30 transition-all text-sm"
               />
               <motion.button
                 type="submit"
@@ -52,13 +52,13 @@ export default function Footer() {
             </h4>
             <div className="flex items-center gap-3">
               <motion.a
-                href="https://github.com/codeerrortech-png"
+                href="https://github.com/Not-deadx"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Github"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center p-2 rounded-lg text-cyber-text/80 hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-white hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
               >
                 <Github className="w-8 h-8 sm:w-9 sm:h-9" />
               </motion.a>
@@ -69,7 +69,7 @@ export default function Footer() {
                 aria-label="Instagram"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center p-2 rounded-lg text-cyber-text/80 hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-white hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
               >
                 <Instagram className="w-8 h-8 sm:w-9 sm:h-9" />
               </motion.a>
@@ -80,14 +80,14 @@ export default function Footer() {
                 aria-label="Instagram"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center justify-center p-2 rounded-lg text-cyber-text/80 hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
+                className="inline-flex items-center justify-center p-2 rounded-lg text-white hover:text-cyber-accent hover:bg-cyber-accent/10 transition-colors cursor-pointer"
               >
                 <Instagram className="w-8 h-8 sm:w-9 sm:h-9" />
               </motion.a>
             </div>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-cyber-accent/10 text-center text-sm text-cyber-text/50">
+        <div className="mt-12 pt-8 border-t border-cyber-accent/20 text-center text-sm text-white/90">
           © {new Date().getFullYear()} NOTDEAD. Cybersecurity Training Platform.
         </div>
       </div>

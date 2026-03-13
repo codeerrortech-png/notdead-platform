@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ShieldCheck, Lock, User } from 'lucide-react'
-import NeonButton from '../../components/NeonButton'
+import ChaosButton from '../../components/ChaosButton'
 import CyberGrid from '../../components/CyberGrid'
 
 export default function AdminLogin() {
@@ -65,9 +65,9 @@ export default function AdminLogin() {
                 />
               </div>
             </div>
-            <NeonButton type="submit" variant="primary" className="w-full gap-2 mt-6">
+            <ChaosButton type="submit" className="w-full mt-6">
               <Lock className="w-4 h-4" /> Login to Admin
-            </NeonButton>
+            </ChaosButton>
           </form>
           <p className="text-center text-sm text-cyber-text/50 mt-6">
             Demo: use any username & password to enter.

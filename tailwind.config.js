@@ -8,7 +8,7 @@ export default {
           bg: "#0b0f17",
           secondary: "#111827",
           accent: "#00ff9c",
-          text: "#e5e7eb",
+          text: "#0a0a0a",
           "accent-dim": "rgba(0, 255, 156, 0.3)",
         },
       },

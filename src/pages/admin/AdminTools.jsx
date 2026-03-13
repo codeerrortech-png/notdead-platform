@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Wrench, Plus } from 'lucide-react'
 import GlassCard from '../../components/GlassCard'
-import NeonButton from '../../components/NeonButton'
+import ChaosButton from '../../components/ChaosButton'
 import { formatPrice } from '../../utils/currency'
 
 const mockTools = [
@@ -18,9 +18,9 @@ export default function AdminTools() {
           <h1 className="font-display font-bold text-2xl text-cyber-accent">Tools</h1>
           <p className="text-cyber-text/60 text-sm mt-1">Manage marketplace tools</p>
         </div>
-        <NeonButton variant="primary" className="gap-2">
+        <ChaosButton>
           <Plus className="w-4 h-4" /> Add Tool
-        </NeonButton>
+        </ChaosButton>
       </div>
       <GlassCard hover={false}>
         <div className="overflow-x-auto">

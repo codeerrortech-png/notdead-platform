@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 
-export default function SectionTitle({ title, subtitle, accent = true }) {
+export default function SectionTitle({ title, subtitle, accent = true, titleClassName, subtitleClassName }) {
   return (
     <motion.div
       initial={{ opacity: 0.7, y: 16 }}
@@ -10,7 +10,7 @@ export default function SectionTitle({ title, subtitle, accent = true }) {
     >
       <h2
         className={`font-display font-bold text-2xl sm:text-3xl lg:text-4xl mb-2 ${
-          accent ? 'text-cyber-accent' : 'text-cyber-text'
+          titleClassName ?? (accent ? 'text-cyber-accent' : 'text-cyber-text')
         }`}
       >
         {title}
@@ -22,7 +22,7 @@ export default function SectionTitle({ title, subtitle, accent = true }) {
         className="origin-left h-0.5 w-16 sm:w-20 bg-gradient-to-r from-cyber-accent to-transparent rounded-full mb-4"
       />
       {subtitle && (
-        <p className="text-cyber-text/70 text-sm sm:text-base max-w-2xl">
+        <p className={`text-sm sm:text-base max-w-2xl ${subtitleClassName ?? 'text-cyber-text/70'}`}>
           {subtitle}
         </p>
       )}

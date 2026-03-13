@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, User, LogIn, LayoutDashboard } from 'lucide-react'
+import ChaosButton from './ChaosButton'
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -13,11 +14,6 @@ const navLinks = [
   { to: '/community', label: 'Community' },
   { to: '/testimonials', label: 'Testimonials' },
 ]
-
-const btnOutline =
-  'flex items-center gap-2 px-4 py-2.5 rounded-lg border border-cyber-accent text-cyber-accent font-semibold transition-all duration-300 text-base hover:bg-cyber-accent/10 hover:border-cyber-accent hover:shadow-[0_0_20px_rgba(0,255,156,0.4)]'
-const btnPrimary =
-  'flex items-center gap-2 px-4 py-2.5 rounded-lg bg-cyber-accent text-cyber-bg font-bold transition-all duration-300 text-base hover:shadow-[0_0_20px_#00ff9c,0_0_40px_rgba(0,255,156,0.35)]'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -46,7 +42,7 @@ export default function Navbar() {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `nav-link-underline text-sm font-mono font-semibold transition-colors hover:text-cyber-accent whitespace-nowrap py-1 ${isActive ? 'text-cyber-accent active' : 'text-cyber-text'}`
+                  `nav-link-underline text-sm font-mono font-semibold transition-colors hover:text-cyber-accent whitespace-nowrap py-1 ${isActive ? 'text-cyber-accent active' : 'text-[#e5e7eb]'}`
                 }
               >
                 {label}
@@ -57,21 +53,15 @@ export default function Navbar() {
 
         {/* RIGHT: Action buttons — fixed width, no shrink */}
         <div className="hidden md:flex items-center justify-end gap-2 shrink-0">
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-            <Link to="/dashboard" className={btnOutline}>
-              <LayoutDashboard className="w-5 h-5" /> Dashboard
-            </Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-            <Link to="/login" className={btnOutline}>
-              <LogIn className="w-5 h-5" /> Login
-            </Link>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
-            <Link to="/signup" className={btnPrimary}>
-              <User className="w-5 h-5" /> Sign Up
-            </Link>
-          </motion.div>
+          <ChaosButton as={Link} to="/dashboard">
+            <LayoutDashboard className="w-5 h-5" /> Dashboard
+          </ChaosButton>
+          <ChaosButton as={Link} to="/login">
+            <LogIn className="w-5 h-5" /> Login
+          </ChaosButton>
+          <ChaosButton as={Link} to="/signup">
+            <User className="w-5 h-5" /> Sign Up
+          </ChaosButton>
         </div>
 
         {/* Mobile: Hamburger */}
@@ -102,23 +92,23 @@ export default function Navbar() {
                     to={to}
                     onClick={() => setOpen(false)}
                     className={({ isActive }) =>
-                      `px-4 py-2.5 rounded text-base font-semibold text-cyber-text ${isActive ? 'bg-cyber-accent/20 text-cyber-accent' : ''}`
+                      `px-4 py-2.5 rounded text-base font-semibold ${isActive ? 'bg-cyber-accent/20 text-cyber-accent' : 'text-[#e5e7eb]'}`
                     }
                   >
                     {label}
                   </NavLink>
                 ))}
                 <div className="flex flex-col gap-2 mt-2 px-4">
-                  <Link to="/dashboard" onClick={() => setOpen(false)} className="py-2.5 border border-cyber-accent/30 rounded text-center text-base font-semibold text-cyber-accent">
+                  <ChaosButton as={Link} to="/dashboard" className="w-full" onClick={() => setOpen(false)}>
                     Dashboard
-                  </Link>
+                  </ChaosButton>
                   <div className="flex gap-2">
-                    <Link to="/login" onClick={() => setOpen(false)} className="flex-1 py-2.5 border border-cyber-accent/50 rounded text-center text-base font-semibold text-cyber-accent">
+                    <ChaosButton as={Link} to="/login" className="flex-1" onClick={() => setOpen(false)}>
                       Login
-                    </Link>
-                    <Link to="/signup" onClick={() => setOpen(false)} className="flex-1 py-2.5 bg-cyber-accent text-cyber-bg rounded text-center text-base font-bold">
+                    </ChaosButton>
+                    <ChaosButton as={Link} to="/signup" className="flex-1" onClick={() => setOpen(false)}>
                       Sign Up
-                    </Link>
+                    </ChaosButton>
                   </div>
                 </div>
               </div>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Check, Sparkles } from 'lucide-react'
-import NeonButton from '../components/NeonButton'
+import ChaosButton from '../components/ChaosButton'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
 import { plans } from '../utils/membershipPlansData'
@@ -15,6 +15,8 @@ export default function Membership() {
       <SectionTitle
         title="Membership Plans"
         subtitle="Unlock labs, tools, and community. Choose monthly or yearly billing."
+        titleClassName="text-black"
+        subtitleClassName="text-black"
       />
       <motion.div
         initial={{ opacity: 0 }}
@@ -86,14 +88,13 @@ export default function Membership() {
                 </li>
               ))}
             </ul>
-            <Link to={`/membership/checkout/${p.id}${yearly ? '?yearly=true' : ''}`} className="block">
-              <NeonButton
-                variant={p.highlight ? 'primary' : 'outline'}
-                className="w-full"
-              >
-                Get Started
-              </NeonButton>
-            </Link>
+            <ChaosButton
+              as={Link}
+              to={`/membership/checkout/${p.id}${yearly ? '?yearly=true' : ''}`}
+              className="block w-full text-center"
+            >
+              Get Started
+            </ChaosButton>
           </GlassCard>
         ))}
       </div>

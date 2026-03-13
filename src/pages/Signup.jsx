@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Shield, Mail, Lock, User, UserPlus } from 'lucide-react'
-import NeonButton from '../components/NeonButton'
+import ChaosButton from '../components/ChaosButton'
 import CyberGrid from '../components/CyberGrid'
 
 export default function Signup() {
@@ -84,9 +84,9 @@ export default function Signup() {
                 />
               </div>
             </div>
-            <NeonButton type="submit" variant="primary" className="w-full gap-2 mt-6">
+            <ChaosButton type="submit" className="w-full mt-6">
               <UserPlus className="w-4 h-4" /> Sign Up
-            </NeonButton>
+            </ChaosButton>
           </form>
           <p className="text-center text-sm text-cyber-text/60 mt-6">
             Already have an account?{' '}

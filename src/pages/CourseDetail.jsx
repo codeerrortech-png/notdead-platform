@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Clock, Star, ArrowLeft, CheckCircle, CreditCard } from 'lucide-react'
 import { getCourseById, levelColors } from '../utils/coursesData'
 import { formatPrice } from '../utils/currency'
-import NeonButton from '../components/NeonButton'
+import ChaosButton from '../components/ChaosButton'
 import GlassCard from '../components/GlassCard'
 
 export default function CourseDetail() {
@@ -78,11 +78,9 @@ export default function CourseDetail() {
                 <p className="text-2xl font-bold text-cyber-accent">{formatPrice(course.price)}</p>
               </div>
             </div>
-            <Link to={`/checkout/${course.id}`}>
-              <NeonButton variant="primary" className="w-full sm:w-auto gap-2">
-                <CreditCard className="w-4 h-4" /> Enroll Now — Proceed to Payment
-              </NeonButton>
-            </Link>
+            <ChaosButton as={Link} to={`/checkout/${course.id}`} className="w-full sm:w-auto">
+              <CreditCard className="w-4 h-4" /> Enroll Now — Proceed to Payment
+            </ChaosButton>
           </div>
         </GlassCard>
       </motion.div>
