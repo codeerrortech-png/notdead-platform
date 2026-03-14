@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, User, LogIn, LayoutDashboard } from 'lucide-react'
+import { Menu, X, User, LogIn, LayoutDashboard, LogOut } from 'lucide-react'
 import ChaosButton from './ChaosButton'
+import { isUserLoggedIn, logoutUser } from '../utils/auth'
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -17,6 +18,15 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
+  const loggedIn = isUserLoggedIn()
+
+  const handleLogout = () => {
+    logoutUser()
+    setOpen(false)
+    navigate('/', { replace: true })
+  }
+
   return (
     <nav
       className="sticky top-0 z-50 w-full h-[70px] flex items-center bg-[#0b0f17] border-b border-cyber-accent/20 shadow-[0_0_20px_rgba(0,255,156,0.06)] backdrop-blur-xl pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
@@ -51,17 +61,30 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* RIGHT: Action buttons — fixed width, no shrink */}
+        {/* RIGHT: Action buttons — when logged in: Dashboard + Logout; else Login + Sign Up */}
         <div className="hidden md:flex items-center justify-end gap-2 shrink-0">
-          <ChaosButton as={Link} to="/dashboard">
-            <LayoutDashboard className="w-5 h-5" /> Dashboard
-          </ChaosButton>
-          <ChaosButton as={Link} to="/login">
-            <LogIn className="w-5 h-5" /> Login
-          </ChaosButton>
-          <ChaosButton as={Link} to="/signup">
-            <User className="w-5 h-5" /> Sign Up
-          </ChaosButton>
+          {loggedIn ? (
+            <>
+              <ChaosButton variant="card" as={Link} to="/dashboard">
+                <LayoutDashboard className="w-5 h-5" /> Dashboard
+              </ChaosButton>
+              <ChaosButton variant="card" onClick={handleLogout} className="cursor-pointer">
+                <LogOut className="w-5 h-5" /> Logout
+              </ChaosButton>
+            </>
+          ) : (
+            <>
+              <ChaosButton variant="card" as={Link} to="/dashboard">
+                <LayoutDashboard className="w-5 h-5" /> Dashboard
+              </ChaosButton>
+              <ChaosButton variant="card" as={Link} to="/login">
+                <LogIn className="w-5 h-5" /> Login
+              </ChaosButton>
+              <ChaosButton variant="card" as={Link} to="/signup">
+                <User className="w-5 h-5" /> Sign Up
+              </ChaosButton>
+            </>
+          )}
         </div>
 
         {/* Mobile: Hamburger */}
@@ -99,17 +122,23 @@ export default function Navbar() {
                   </NavLink>
                 ))}
                 <div className="flex flex-col gap-2 mt-2 px-4">
-                  <ChaosButton as={Link} to="/dashboard" className="w-full" onClick={() => setOpen(false)}>
-                    Dashboard
+                  <ChaosButton variant="card" as={Link} to="/dashboard" className="w-full" onClick={() => setOpen(false)}>
+                    <LayoutDashboard className="w-5 h-5" /> Dashboard
                   </ChaosButton>
-                  <div className="flex gap-2">
-                    <ChaosButton as={Link} to="/login" className="flex-1" onClick={() => setOpen(false)}>
-                      Login
+                  {loggedIn ? (
+                    <ChaosButton variant="card" className="w-full" onClick={handleLogout}>
+                      <LogOut className="w-5 h-5" /> Logout
                     </ChaosButton>
-                    <ChaosButton as={Link} to="/signup" className="flex-1" onClick={() => setOpen(false)}>
-                      Sign Up
-                    </ChaosButton>
-                  </div>
+                  ) : (
+                    <div className="flex gap-2">
+                      <ChaosButton variant="card" as={Link} to="/login" className="flex-1" onClick={() => setOpen(false)}>
+                        Login
+                      </ChaosButton>
+                      <ChaosButton variant="card" as={Link} to="/signup" className="flex-1" onClick={() => setOpen(false)}>
+                        Sign Up
+                      </ChaosButton>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>

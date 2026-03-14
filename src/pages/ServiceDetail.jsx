@@ -30,10 +30,10 @@ export default function ServiceDetail() {
           <div className="p-4 rounded-xl bg-cyber-accent/10 w-fit mb-6">
             <Icon className="w-12 h-12 text-cyber-accent" />
           </div>
-          <h1 className="font-display font-bold text-2xl sm:text-3xl text-cyber-text mb-4">
+          <h1 className="font-display font-bold text-2xl sm:text-3xl text-white mb-4">
             {service.title}
           </h1>
-          <p className="text-cyber-text/80 leading-relaxed mb-8">
+          <p className="text-slate-200 leading-relaxed mb-8">
             {service.fullDescription}
           </p>
           {service.features && service.features.length > 0 && (
@@ -45,7 +45,7 @@ export default function ServiceDetail() {
                 {service.features.map((item, i) => (
                   <li
                     key={i}
-                    className="flex items-center gap-2 text-sm text-cyber-text/80"
+                    className="flex items-center gap-2 text-sm text-slate-200"
                   >
                     <CheckCircle className="w-4 h-4 text-cyber-accent shrink-0" />
                     {item}

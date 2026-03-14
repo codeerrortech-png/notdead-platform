@@ -1,24 +1,42 @@
+import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Users, BookOpen, Wrench, IndianRupee, TrendingUp, Activity } from 'lucide-react'
+import { Users, BookOpen, Wrench, Activity } from 'lucide-react'
 import GlassCard from '../../components/GlassCard'
-import { formatPrice } from '../../utils/currency'
+import { getRegisteredUsers, getActivities, getUserData } from '../../utils/userStore'
 
-const stats = [
-  { label: 'Total Users', value: '12,450', icon: Users, change: '+12%' },
-  { label: 'Active Courses', value: '6', icon: BookOpen, change: '' },
-  { label: 'Tools Sold', value: '3,289', icon: Wrench, change: '+8%' },
-  { label: 'Revenue (MTD)', value: formatPrice(12000), icon: IndianRupee, change: '+18%' },
-]
-
-const recentActivity = [
-  { action: 'New user registered', user: 'alex@example.com', time: '2 min ago' },
-  { action: 'Course enrollment', user: 'Ethical Hacking Fundamentals', time: '15 min ago' },
-  { action: 'Tool purchase', user: 'NetScan Pro', time: '1 hour ago' },
-  { action: 'Membership upgrade', user: 'Pro Hacker Plan', time: '2 hours ago' },
-]
+function timeAgo(iso) {
+  if (!iso) return ''
+  try {
+    const d = new Date(iso)
+    const sec = Math.floor((Date.now() - d.getTime()) / 1000)
+    if (sec < 60) return 'Just now'
+    if (sec < 3600) return `${Math.floor(sec / 60)} min ago`
+    if (sec < 86400) return `${Math.floor(sec / 3600)}h ago`
+    if (sec < 604800) return `${Math.floor(sec / 86400)}d ago`
+    return d.toLocaleDateString()
+  } catch {
+    return ''
+  }
+}
 
 export default function AdminDashboard() {
+  const registeredUsers = useMemo(() => getRegisteredUsers(), [])
+  const activities = useMemo(() => getActivities(), [])
+  const membershipCount = useMemo(() => {
+    return registeredUsers.reduce((acc, u) => {
+      const d = getUserData(u.email)
+      return acc + (d?.memberships?.length ?? 0)
+    }, 0)
+  }, [registeredUsers])
+
+  const stats = [
+    { label: 'Total Users', value: String(registeredUsers.length), icon: Users },
+    { label: 'Active Courses', value: '—', icon: BookOpen },
+    { label: 'Memberships', value: String(membershipCount), icon: Wrench },
+    { label: 'Recent Activity', value: String(activities.length), icon: Activity },
+  ]
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -27,7 +45,7 @@ export default function AdminDashboard() {
     >
       <div>
         <h1 className="font-display font-bold text-2xl text-cyber-accent">Dashboard</h1>
-        <p className="text-cyber-text/60 text-sm mt-1">Overview of your platform</p>
+        <p className="text-slate-400 text-sm mt-1">Overview of your platform (sign-ups & activities)</p>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((item) => (
@@ -36,40 +54,39 @@ export default function AdminDashboard() {
               <div className="p-3 rounded-xl bg-cyber-accent/10">
                 <item.icon className="w-6 h-6 text-cyber-accent" />
               </div>
-              {item.change && (
-                <span className="text-xs font-mono text-cyber-accent flex items-center gap-0.5">
-                  <TrendingUp className="w-3 h-3" /> {item.change}
-                </span>
-              )}
             </div>
-            <p className="text-cyber-text/60 text-sm mt-3">{item.label}</p>
-            <p className="text-2xl font-bold text-cyber-text mt-1">{item.value}</p>
+            <p className="text-slate-400 text-sm mt-3">{item.label}</p>
+            <p className="text-2xl font-bold text-white mt-1">{item.value}</p>
           </GlassCard>
         ))}
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <GlassCard hover={false}>
-          <h2 className="font-display font-semibold text-lg text-cyber-text mb-4 flex items-center gap-2">
+          <h2 className="font-display font-semibold text-lg text-white mb-4 flex items-center gap-2">
             <Activity className="w-5 h-5 text-cyber-accent" />
             Recent Activity
           </h2>
-          <ul className="space-y-0">
-            {recentActivity.map((a, i) => (
-              <li
-                key={i}
-                className="flex items-center justify-between py-3 border-b border-cyber-accent/10 last:border-0 text-sm"
-              >
-                <div>
-                  <p className="text-cyber-text">{a.action}</p>
-                  <p className="text-cyber-text/50 text-xs mt-0.5">{a.user}</p>
-                </div>
-                <span className="text-cyber-accent/70 font-mono text-xs">{a.time}</span>
-              </li>
-            ))}
-          </ul>
+          {activities.length === 0 ? (
+            <p className="text-slate-400 text-sm py-4">No activity yet. Sign-ups and membership purchases will appear here.</p>
+          ) : (
+            <ul className="space-y-0">
+              {activities.slice(0, 10).map((a, i) => (
+                <li
+                  key={i}
+                  className="flex items-center justify-between py-3 border-b border-cyber-accent/10 last:border-0 text-sm"
+                >
+                  <div>
+                    <p className="text-slate-200">{a.detail}</p>
+                    <p className="text-slate-400 text-xs mt-0.5">{a.email}</p>
+                  </div>
+                  <span className="text-cyber-accent/80 font-mono text-xs">{timeAgo(a.createdAt)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </GlassCard>
         <GlassCard hover={false}>
-          <h2 className="font-display font-semibold text-lg text-cyber-text mb-4">Quick Actions</h2>
+          <h2 className="font-display font-semibold text-lg text-white mb-4">Quick Actions</h2>
           <div className="flex flex-wrap gap-3">
             <Link
               to="/admin/courses"

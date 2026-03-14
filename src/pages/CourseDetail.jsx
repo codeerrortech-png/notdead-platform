@@ -16,7 +16,7 @@ export default function CourseDetail() {
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
       <Link
         to="/courses"
-        className="inline-flex items-center gap-2 text-sm text-cyber-accent/80 hover:text-cyber-accent mb-8"
+        className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-cyber-accent mb-8"
       >
         <ArrowLeft className="w-4 h-4" /> Back to Courses
       </Link>
@@ -31,23 +31,23 @@ export default function CourseDetail() {
             className="h-48 -mx-6 -mt-6 mb-6 rounded-t-xl flex items-center justify-center border-b border-cyber-accent/10"
             style={{ background: course.thumb }}
           >
-            <course.icon className="w-20 h-20 text-cyber-accent/60" />
+            <course.icon className="w-20 h-20 text-cyber-accent" />
           </div>
           <div className="flex flex-wrap gap-2 mb-4">
             <span className={`text-xs px-2.5 py-1 rounded border ${levelColors[course.level]}`}>
               {course.level}
             </span>
-            <span className="flex items-center gap-1 text-xs text-cyber-text/60">
+            <span className="flex items-center gap-1 text-xs text-slate-400">
               <Clock className="w-3.5 h-3.5" /> {course.duration}
             </span>
             <span className="flex items-center gap-1 text-xs text-amber-400">
               <Star className="w-3.5 h-3.5 fill-current" /> {course.rating}
             </span>
           </div>
-          <h1 className="font-display font-bold text-2xl sm:text-3xl text-cyber-text mb-4">
+          <h1 className="font-display font-bold text-2xl sm:text-3xl text-white mb-4">
             {course.title}
           </h1>
-          <p className="text-cyber-text/80 leading-relaxed mb-6">
+          <p className="text-slate-200 leading-relaxed mb-6">
             {course.fullDescription}
           </p>
           {course.modules && course.modules.length > 0 && (
@@ -55,7 +55,7 @@ export default function CourseDetail() {
               <h3 className="font-display font-semibold text-cyber-accent mb-3">Curriculum</h3>
               <ul className="space-y-2">
                 {course.modules.map((mod, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-cyber-text/80">
+                  <li key={i} className="flex items-center gap-2 text-sm text-slate-200">
                     <CheckCircle className="w-4 h-4 text-cyber-accent shrink-0" />
                     {mod}
                   </li>
@@ -65,20 +65,20 @@ export default function CourseDetail() {
           )}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-4 border-t border-cyber-accent/10">
             <div>
-              <span className="text-cyber-text/60 text-sm">Price</span>
+              <span className="text-slate-400 text-sm">Price</span>
               <div className="flex items-baseline gap-2 flex-wrap mt-1">
                 <span className="inline-block px-2 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold">
                   90% OFF
                 </span>
                 {course.originalPrice != null && (
-                  <span className="text-lg text-cyber-text/50 line-through">
+                  <span className="text-lg text-slate-400 line-through">
                     {formatPrice(course.originalPrice)}
                   </span>
                 )}
                 <p className="text-2xl font-bold text-cyber-accent">{formatPrice(course.price)}</p>
               </div>
             </div>
-            <ChaosButton as={Link} to={`/checkout/${course.id}`} className="w-full sm:w-auto">
+            <ChaosButton variant="card" as={Link} to={`/checkout/${course.id}`} className="w-full sm:w-auto">
               <CreditCard className="w-4 h-4" /> Enroll Now — Proceed to Payment
             </ChaosButton>
           </div>

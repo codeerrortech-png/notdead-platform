@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
 import { Star, Quote } from 'lucide-react'
 import SectionTitle from '../components/SectionTitle'
 import GlassCard from '../components/GlassCard'
+import BounceHeading from '../components/BounceHeading'
+import PageEntrance from '../components/PageEntrance'
+import useBounceCards from '../hooks/useBounceCards'
 
 const testimonials = [
   {
@@ -28,16 +31,21 @@ const testimonials = [
 ]
 
 export default function Testimonials() {
+  const testimonialsGridRef = useRef(null)
+  useBounceCards(testimonialsGridRef)
+
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
+    <PageEntrance className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
       <SectionTitle
         title="Testimonials"
         subtitle="What our community says about NOTDEAD."
+        highlightBox
+        scrollTrigger
       />
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-        {testimonials.map((t, i) => (
-          <GlassCard key={t.name} delay={i * 0.1} hover>
-            <Quote className="w-10 h-10 text-cyber-accent/40 mb-4" />
+      <div ref={testimonialsGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {testimonials.map((t) => (
+          <GlassCard key={t.name} bounceScroll hover>
+            <Quote className="w-10 h-10 text-cyber-accent mb-4" />
             <div className="flex gap-1 mb-4">
               {Array.from({ length: t.rating }).map((_, j) => (
                 <Star
@@ -46,19 +54,26 @@ export default function Testimonials() {
                 />
               ))}
             </div>
-            <p className="text-sm text-cyber-text/85 mb-6 leading-relaxed">"{t.text}"</p>
+            <p className="text-sm text-slate-200 mb-6 leading-relaxed">"{t.text}"</p>
             <div className="flex items-center gap-3 pt-4 border-t border-cyber-accent/10">
               <div className="w-12 h-12 rounded-full bg-cyber-accent/20 flex items-center justify-center text-cyber-accent font-mono font-semibold text-sm border border-cyber-accent/30">
                 {t.avatar}
               </div>
               <div>
-                <p className="font-semibold text-cyber-text">{t.name}</p>
-                <p className="text-xs text-cyber-text/60">{t.role}</p>
+                <BounceHeading
+                  as="p"
+                  variant="physics"
+                  scrollTrigger
+                  className="font-semibold text-white"
+                >
+                  {t.name}
+                </BounceHeading>
+                <p className="text-xs text-slate-400">{t.role}</p>
               </div>
             </div>
           </GlassCard>
         ))}
       </div>
-    </div>
+    </PageEntrance>
   )
 }

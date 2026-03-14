@@ -15,7 +15,7 @@ export default function Layout() {
       <CyberGrid dimmed={!isHome} />
       <FloatingParticles />
       <Navbar />
-      <main className="relative z-10">
+      <main className="relative z-10" key={pathname}>
         <Outlet />
       </main>
       <Footer />

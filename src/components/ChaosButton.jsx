@@ -114,7 +114,7 @@ function lerp(a, b, t) {
 }
 
 const ChaosButton = forwardRef(function ChaosButton(
-  { children, className = '', style = {}, as: Component = 'button', ...props },
+  { children, className = '', style = {}, as: Component = 'button', variant, ...props },
   ref
 ) {
   const buttonRef = useRef(null)
@@ -257,6 +257,20 @@ const ChaosButton = forwardRef(function ChaosButton(
       window.removeEventListener('resize', resize)
     }
   }, [])
+
+  const isCardVariant = variant === 'card'
+
+  if (isCardVariant) {
+    return (
+      <Component
+        ref={setRef}
+        className={`btn-card-primary inline-flex items-center justify-center gap-2 py-3 px-6 font-mono text-sm font-semibold tracking-wide min-h-[48px] min-w-[140px] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed ${className}`}
+        {...props}
+      >
+        {children}
+      </Component>
+    )
+  }
 
   return (
     <Component

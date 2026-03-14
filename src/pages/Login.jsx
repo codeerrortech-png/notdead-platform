@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
+import { setUserLoggedIn } from '../utils/auth'
 import { motion } from 'framer-motion'
 import { Shield, Mail, Lock, LogIn } from 'lucide-react'
 import ChaosButton from '../components/ChaosButton'
@@ -7,12 +8,15 @@ import CyberGrid from '../components/CyberGrid'
 
 export default function Login() {
   const navigate = useNavigate()
+  const location = useLocation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate('/dashboard')
+    setUserLoggedIn(email)
+    const from = location.state?.from ?? '/dashboard'
+    navigate(from, { replace: true })
   }
 
   return (
@@ -36,33 +40,33 @@ export default function Login() {
           </div>
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm text-cyber-text/80 mb-2 font-mono">
+              <label className="block text-sm text-slate-200 mb-2 font-mono">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyber-accent/60" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyber-accent" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="user@domain.com"
-                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent focus:ring-1 focus:ring-cyber-accent/30 transition-all"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent focus:ring-1 focus:ring-cyber-accent/30 transition-all"
                   required
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm text-cyber-text/80 mb-2 font-mono">
+              <label className="block text-sm text-slate-200 mb-2 font-mono">
                 Password
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyber-accent/60" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyber-accent" />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent focus:ring-1 focus:ring-cyber-accent/30 transition-all"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent focus:ring-1 focus:ring-cyber-accent/30 transition-all"
                   required
                 />
               </div>
@@ -71,7 +75,7 @@ export default function Login() {
               <LogIn className="w-4 h-4" /> Login
             </ChaosButton>
           </form>
-          <p className="text-center text-sm text-cyber-text/60 mt-6">
+          <p className="text-center text-sm text-slate-300 mt-6">
             Don't have an account?{' '}
             <Link to="/signup" className="text-cyber-accent hover:underline font-mono">
               Sign up

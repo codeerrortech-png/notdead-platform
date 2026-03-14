@@ -27,7 +27,7 @@ export default function Checkout() {
   if (!course) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <p className="text-cyber-text/80">Course not found.</p>
+        <p className="text-slate-200">Course not found.</p>
         <Link to="/courses" className="text-cyber-accent ml-2">Back to Courses</Link>
       </div>
     )
@@ -46,7 +46,7 @@ export default function Checkout() {
             <Shield className="w-10 h-10 text-cyber-accent" />
           </div>
           <h1 className="font-display font-bold text-2xl text-cyber-accent mb-2">Payment Successful</h1>
-          <p className="text-cyber-text/80 mb-4">You are enrolled in {course.title}. Redirecting to dashboard...</p>
+          <p className="text-slate-200 mb-4">You are enrolled in {course.title}. Redirecting to dashboard...</p>
         </motion.div>
       </div>
     )
@@ -62,7 +62,7 @@ export default function Checkout() {
       >
         <Link
           to={`/courses/${course.id}`}
-          className="inline-flex items-center gap-2 text-sm text-cyber-accent/80 hover:text-cyber-accent mb-6"
+          className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-cyber-accent mb-6"
         >
           <ArrowLeft className="w-4 h-4" /> Back to course
         </Link>
@@ -72,11 +72,11 @@ export default function Checkout() {
             <span className="font-display font-semibold text-cyber-accent">Secure Payment</span>
           </div>
           <div className="mb-6 p-4 rounded-xl bg-cyber-secondary/50 border border-cyber-accent/10">
-            <p className="text-cyber-text/60 text-sm">Course</p>
-            <p className="font-display font-semibold text-cyber-text">{course.title}</p>
+            <p className="text-slate-400 text-sm">Course</p>
+            <p className="font-display font-semibold text-white">{course.title}</p>
             <div className="mt-2">
               {course.originalPrice != null && (
-                <span className="text-sm text-cyber-text/50 line-through mr-2">{formatPrice(course.originalPrice)}</span>
+                <span className="text-sm text-slate-400 line-through mr-2">{formatPrice(course.originalPrice)}</span>
               )}
               <span className="inline-block px-2 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold mb-1">90% OFF</span>
               <p className="text-2xl font-bold text-cyber-accent">{formatPrice(course.price)}</p>
@@ -84,38 +84,38 @@ export default function Checkout() {
           </div>
           <form onSubmit={handlePayment} className="space-y-4">
             <div>
-              <label className="block text-sm text-cyber-text/80 mb-2">Email</label>
+              <label className="block text-sm text-slate-200 mb-2">Email</label>
               <input
                 type="email"
                 placeholder="your@email.com"
                 required
-                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm"
+                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm text-cyber-text/80 mb-2">Card number</label>
+              <label className="block text-sm text-slate-200 mb-2">Card number</label>
               <input
                 type="text"
                 placeholder="4242 4242 4242 4242"
                 maxLength={19}
-                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm font-mono"
+                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm font-mono"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-cyber-text/80 mb-2">Expiry</label>
+                <label className="block text-sm text-slate-200 mb-2">Expiry</label>
                 <input
                   type="text"
                   placeholder="MM/YY"
-                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm"
+                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm"
                 />
               </div>
               <div>
-                <label className="block text-sm text-cyber-text/80 mb-2">CVC</label>
+                <label className="block text-sm text-slate-200 mb-2">CVC</label>
                 <input
                   type="text"
                   placeholder="123"
-                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm"
+                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm"
                 />
               </div>
             </div>
@@ -128,7 +128,7 @@ export default function Checkout() {
               {loading ? 'Processing...' : `Pay ${formatPrice(course.price)}`}
             </ChaosButton>
           </form>
-          <p className="text-center text-xs text-cyber-text/50 mt-6">
+          <p className="text-center text-xs text-slate-400 mt-6">
             Demo only. No real payment is processed.
           </p>
         </div>

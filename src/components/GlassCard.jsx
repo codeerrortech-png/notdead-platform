@@ -5,8 +5,27 @@ export default function GlassCard({
   className = '',
   hover = true,
   delay = 0,
+  bounceScroll = false,
   ...props
 }) {
+  const baseClass = `
+    glass-card p-6
+    ${hover ? '' : 'glass-card-no-hover'}
+    ${className}
+  `
+
+  if (bounceScroll) {
+    return (
+      <div
+        data-bounce-card
+        className={baseClass}
+        {...props}
+      >
+        {children}
+      </div>
+    )
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0.6, y: 20 }}
@@ -25,12 +44,7 @@ export default function GlassCard({
             }
           : undefined
       }
-      className={`
-        glass-card rounded-xl p-6
-        border border-cyber-accent/10
-        hover:border-cyber-accent/30 hover:shadow-glow
-        ${className}
-      `}
+      className={baseClass}
       {...props}
     >
       {children}

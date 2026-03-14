@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { Link, useParams, useSearchParams, useNavigate } from 'react-router-dom'
+import { Link, useParams, useSearchParams, useNavigate, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Shield, CreditCard, Lock, ArrowLeft, Check } from 'lucide-react'
 import { getPlanById } from '../utils/membershipPlansData'
 import { formatPrice } from '../utils/currency'
 import ChaosButton from '../components/ChaosButton'
 import CyberGrid from '../components/CyberGrid'
+import { isUserLoggedIn, getLoggedInEmail } from '../utils/auth'
+import { addUserMembership } from '../utils/userStore'
 
 export default function MembershipCheckout() {
   const { planId } = useParams()
@@ -20,10 +22,17 @@ export default function MembershipCheckout() {
   const originalPrice = plan ? (yearly ? plan.originalYearly : plan.originalMonthly) : 0
   const billingLabel = yearly ? 'year' : 'month'
 
+  const checkoutPath = `/membership/checkout/${planId}${yearly ? '?yearly=true' : ''}`
+  if (plan && !isUserLoggedIn()) {
+    return <Navigate to="/login" state={{ from: checkoutPath }} replace />
+  }
+
   const handlePayment = (e) => {
     e.preventDefault()
     setLoading(true)
+    const email = getLoggedInEmail()
     setTimeout(() => {
+      if (email && plan) addUserMembership(email, plan)
       setLoading(false)
       setDone(true)
       setTimeout(() => navigate('/dashboard'), 2000)
@@ -34,7 +43,7 @@ export default function MembershipCheckout() {
     return (
       <div className="min-h-screen flex items-center justify-center px-4">
         <div className="text-center">
-          <p className="text-cyber-text/80">Plan not found.</p>
+          <p className="text-slate-200">Plan not found.</p>
           <Link to="/membership" className="text-cyber-accent mt-2 inline-block">Back to Membership</Link>
         </div>
       </div>
@@ -54,7 +63,7 @@ export default function MembershipCheckout() {
             <Shield className="w-10 h-10 text-cyber-accent" />
           </div>
           <h1 className="font-display font-bold text-2xl text-cyber-accent mb-2">Payment Successful</h1>
-          <p className="text-cyber-text/80 mb-4">You are now subscribed to {plan.name}. Redirecting to dashboard...</p>
+          <p className="text-slate-200 mb-4">You are now subscribed to {plan.name}. Redirecting to dashboard...</p>
         </motion.div>
       </div>
     )
@@ -70,7 +79,7 @@ export default function MembershipCheckout() {
       >
         <Link
           to="/membership"
-          className="inline-flex items-center gap-2 text-sm text-cyber-accent/80 hover:text-cyber-accent mb-6"
+          className="inline-flex items-center gap-2 text-sm text-slate-300 hover:text-cyber-accent mb-6"
         >
           <ArrowLeft className="w-4 h-4" /> Back to plans
         </Link>
@@ -80,59 +89,59 @@ export default function MembershipCheckout() {
             <span className="font-display font-semibold text-cyber-accent">Secure Payment</span>
           </div>
           <div className="mb-6 p-4 rounded-xl bg-cyber-secondary/50 border border-cyber-accent/10">
-            <p className="text-cyber-text/60 text-sm">Membership</p>
-            <p className="font-display font-semibold text-cyber-text">{plan.name}</p>
+            <p className="text-slate-400 text-sm">Membership</p>
+            <p className="font-display font-semibold text-white">{plan.name}</p>
             <ul className="mt-2 space-y-1">
               {plan.features.slice(0, 3).map((f) => (
-                <li key={f} className="flex items-center gap-2 text-xs text-cyber-text/70">
+                <li key={f} className="flex items-center gap-2 text-xs text-slate-200">
                   <Check className="w-3.5 h-3.5 text-cyber-accent shrink-0" /> {f}
                 </li>
               ))}
             </ul>
             <div className="mt-3">
               {originalPrice != null && (
-                <span className="text-sm text-cyber-text/50 line-through mr-2">{formatPrice(originalPrice)}</span>
+                <span className="text-sm text-slate-400 line-through mr-2">{formatPrice(originalPrice)}</span>
               )}
               <span className="inline-block px-2 py-0.5 rounded bg-cyber-accent/20 text-cyber-accent text-xs font-bold mb-1">90% OFF</span>
               <p className="text-2xl font-bold text-cyber-accent">
-                {formatPrice(price)}<span className="text-sm font-normal text-cyber-text/50">/{billingLabel}</span>
+                {formatPrice(price)}<span className="text-sm font-normal text-slate-400">/{billingLabel}</span>
               </p>
             </div>
           </div>
           <form onSubmit={handlePayment} className="space-y-4">
             <div>
-              <label className="block text-sm text-cyber-text/80 mb-2">Email</label>
+              <label className="block text-sm text-slate-200 mb-2">Email</label>
               <input
                 type="email"
                 placeholder="your@email.com"
                 required
-                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm"
+                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm text-cyber-text/80 mb-2">Card number</label>
+              <label className="block text-sm text-slate-200 mb-2">Card number</label>
               <input
                 type="text"
                 placeholder="4242 4242 4242 4242"
                 maxLength={19}
-                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm font-mono"
+                className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm font-mono"
               />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm text-cyber-text/80 mb-2">Expiry</label>
+                <label className="block text-sm text-slate-200 mb-2">Expiry</label>
                 <input
                   type="text"
                   placeholder="MM/YY"
-                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm"
+                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm"
                 />
               </div>
               <div>
-                <label className="block text-sm text-cyber-text/80 mb-2">CVC</label>
+                <label className="block text-sm text-slate-200 mb-2">CVC</label>
                 <input
                   type="text"
                   placeholder="123"
-                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-cyber-text placeholder-cyber-text/40 focus:outline-none focus:border-cyber-accent text-sm"
+                  className="w-full px-4 py-3 rounded-lg bg-cyber-secondary border border-cyber-accent/30 text-white placeholder-slate-400 focus:outline-none focus:border-cyber-accent text-sm"
                 />
               </div>
             </div>
@@ -145,8 +154,8 @@ export default function MembershipCheckout() {
               {loading ? 'Processing...' : `Pay ${formatPrice(price)}`}
             </ChaosButton>
           </form>
-          <p className="text-center text-xs text-cyber-text/50 mt-6">
-            Demo only. No real payment is processed.
+          <p className="text-center text-xs text-slate-400 mt-6">
+            Demo only. No real payment is processed. Your membership will be recorded to your account.
           </p>
         </div>
       </motion.div>
